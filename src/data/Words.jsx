@@ -1,3 +1,5 @@
+//Lista de dados do jogo
+
 export const wordsList = {
   carro: ["Motor", "Porta", "Capô", "Pneu", "Antena"],
   fruta: ["Banana", "Maçã", "Pêra", "Mamão", "Laranja"],
