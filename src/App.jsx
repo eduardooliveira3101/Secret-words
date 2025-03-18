@@ -21,10 +21,36 @@ const stages = [
 
 function App() {
   const [gameStage, setGameStage] = useState(stages[0].name)
-  // eslint-disable-next-line no-unused-vars
   const [words] = useState(wordsList)
 
+  // eslint-disable-next-line no-unused-vars
+  const [pickedWord, setPickedWord] = useState('')
+  // eslint-disable-next-line no-unused-vars
+  const [pickedCategory, setpickedCategory] = useState('')
+  const [letters, setLetters] = useState([])
+
+  function pickWordAndPickedCategory () {
+    //Escolhendo a categoria aleatória 
+    //Aqui estou acessando a propriedade do objeto
+    const categories = Object.keys(words)
+    //Aqui estou pegando a chave do objeto, arredondando para baixo o calculo que está sendo um numero aleatório x o tamanho das categorias que se encontram no objeto
+    const category = categories[Math.floor(Math.random() * Object.keys(categories).length)]
+    //Aqui estou pegando uma palavra aleatória de dentro do array
+    const word = words[category][Math.floor(Math.random() * words[category].length)]
+
+    return {category, word}
+  }
+
   function startGame() {
+    const {word, category} = pickWordAndPickedCategory()
+    let wordLetters = word.split("")
+    wordLetters = wordLetters.map((i) => i.toLowerCase())
+
+    setPickedWord(word)
+    setpickedCategory(category)
+    setLetters(letters)
+
+    console.log(wordLetters, category )
     setGameStage(stages[1].name)
   }
 
