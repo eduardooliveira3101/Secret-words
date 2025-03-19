@@ -1,22 +1,22 @@
 //React 
 // eslint-disable-next-line no-unused-vars
-import {useState, useEffect, useCallback} from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 //Import do CSS 
 import styles from './App.module.css'
 import React from 'react'
 
 //Imports dos components / dados do jogo
-import {wordsList} from './data/Words'
-import {StartScreen} from './components/StartScreen'
+import { wordsList } from './data/Words'
+import { StartScreen } from './components/StartScreen'
 import { Game } from './components/Game'
 import { GameOver } from './components/GameOver'
 
 //Array para progressão do jogo
 const stages = [
-  {id: 1, name: 'start'},
-  {id: 1, name: 'game'},
-  {id: 1, name: 'end'}
+  { id: 1, name: 'start' },
+  { id: 1, name: 'game' },
+  { id: 1, name: 'end' }
 ]
 
 function App() {
@@ -29,7 +29,13 @@ function App() {
   const [pickedCategory, setpickedCategory] = useState('')
   const [letters, setLetters] = useState([])
 
-  function pickWordAndPickedCategory () {
+  const [guessedLetters, setGuessedLetters] = useState([])
+  const [wrongLetters, setWrongLetters] = useState([])
+  const [guesses, setGuesses] = useState(10)
+  const [score, setScore] = useState(0)
+
+
+  function pickWordAndPickedCategory() {
     //Escolhendo a categoria aleatória 
     //Aqui estou acessando a propriedade do objeto
     const categories = Object.keys(words)
@@ -38,24 +44,24 @@ function App() {
     //Aqui estou pegando uma palavra aleatória de dentro do array
     const word = words[category][Math.floor(Math.random() * words[category].length)]
 
-    return {category, word}
+    return { category, word }
   }
 
   function startGame() {
-    const {word, category} = pickWordAndPickedCategory()
+    const { word, category } = pickWordAndPickedCategory()
     let wordLetters = word.split("")
     wordLetters = wordLetters.map((i) => i.toLowerCase())
 
     setPickedWord(word)
     setpickedCategory(category)
-    setLetters(letters)
+    setLetters(wordLetters)
 
-    console.log(wordLetters, category )
+    console.log(wordLetters, category)
     setGameStage(stages[1].name)
   }
 
-  function verifyLetter() {
-    setGameStage(stages[2].name)
+  function verifyLetter(letter) {
+    console.log(letter)
   }
 
   function retry() {
@@ -64,8 +70,8 @@ function App() {
 
   return (
     <div className={styles.App}>
-      {gameStage === 'start' && <StartScreen startGame={startGame}/>}
-      {gameStage === 'game' && <Game verifyLetter={verifyLetter} />}
+      {gameStage === 'start' && <StartScreen startGame={startGame} />}
+      {gameStage === 'game' && <Game verifyLetter={verifyLetter} pickedWord={pickedWord} pickedCategory={pickedCategory} letters={letters} guessedLetters={guessedLetters} wrongLetters={wrongLetters} guesses={guesses} score={score} />}
       {gameStage === 'end' && <GameOver retry={retry} />}
     </div>
   )
