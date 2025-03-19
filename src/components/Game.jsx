@@ -15,11 +15,10 @@ export function Game({ verifyLetter, pickedWord, pickedCategory, letters, guesse
     letterInputRef.current.focus()
   }
 
-
   return (
     <div className={styles.game}>
       <p className={styles.points} >
-        <span>Pontuação: {score} \</span>
+        <span>Pontuação: {score}</span>
       </p>
       <h1>Adivinhe a palavra: </h1>
       <h3 className={styles.tip}>
@@ -47,7 +46,7 @@ export function Game({ verifyLetter, pickedWord, pickedCategory, letters, guesse
       </div>
 
       <div className={styles.wrongLettersContainer}>
-        <p>Letras já utilizadas</p>
+        <p>Letras já utilizadas: </p>
         {wrongLetters.map((letter, i) => (
           <span key={i}>{letter}, </span>
         ))}
