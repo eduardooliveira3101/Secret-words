@@ -23,9 +23,7 @@ function App() {
   const [gameStage, setGameStage] = useState(stages[0].name)
   const [words] = useState(wordsList)
 
-  // eslint-disable-next-line no-unused-vars
   const [pickedWord, setPickedWord] = useState('')
-  // eslint-disable-next-line no-unused-vars
   const [pickedCategory, setpickedCategory] = useState('')
   const [letters, setLetters] = useState([])
 
@@ -33,7 +31,6 @@ function App() {
   const [wrongLetters, setWrongLetters] = useState([])
   const [guesses, setGuesses] = useState(10)
   const [score, setScore] = useState(0)
-
 
   function pickWordAndPickedCategory() {
     //Escolhendo a categoria aleatória 
@@ -76,13 +73,29 @@ function App() {
         ...currentStateWrongLetters,
         normalizeLetter,
       ])
-    }
 
-    console.log(guessedLetters)
-    console.log(wrongLetters)
+      setGuesses((currentStateGuesses) => currentStateGuesses - 1
+      )
+    };
+  };
+
+  function clearLetterStates() {
+    setGuessedLetters([])
+    setWrongLetters([])
+
   }
 
+  useEffect(() => {
+    if(guesses <= 0) {
+      clearLetterStates()
+
+      setGameStage(stages[2].name)
+    }
+  }, [guesses])
+
   function retry() {
+    setScore(0)
+    setGuesses(10)
     setGameStage(stages[0].name)
   }
 

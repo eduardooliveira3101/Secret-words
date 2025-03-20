@@ -2,6 +2,7 @@ import styles from './Game.module.css'
 import '../index.css'
 import { useState, useRef } from 'react'
 
+// eslint-disable-next-line no-unused-vars
 export function Game({ verifyLetter, pickedWord, pickedCategory, letters, guessedLetters, wrongLetters, guesses, score }) {
 
   const [letter, setLetter] = useState('')
