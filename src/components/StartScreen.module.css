@@ -1,7 +1,11 @@
 .button:hover {
-  background: linear-gradient(180deg, rgb(158, 0, 182) 0%, rgba(0,0,0,1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgb(158, 0, 182) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
   color: white;
-  transition: .4s;
+  transition: 0.4s;
   scale: 1.1;
   font-weight: 900;
 }
